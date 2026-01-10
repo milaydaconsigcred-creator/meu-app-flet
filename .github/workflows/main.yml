@@ -5,26 +5,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11' # Versão mais estável para o Flet
+          python-version: '3.11'
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.0' # Versão compatível
           channel: 'stable'
+          # Removendo a versão específica para pegar a mais recente compatível
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install flet requests
-          
+
       - name: Flet Build APK
         run: |
-          flet build apk
+          # O segredo está no "yes |" que responde "sim" para todas as perguntas do terminal
+          yes | flet build apk
           
       - name: Upload APK
         uses: actions/upload-artifact@v4
