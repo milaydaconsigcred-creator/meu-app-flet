@@ -32,3 +32,6 @@ jobs:
         with:
           name: app-release
           path: build/apk/*.apk
+          - name: Flet Build APK
+        run: |
+          yes | flet build apk --include-permissions-android internet
