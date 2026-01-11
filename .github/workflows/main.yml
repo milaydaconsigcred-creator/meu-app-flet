@@ -15,7 +15,6 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          # Removendo a versão específica para pegar a mais recente compatível
 
       - name: Install Dependencies
         run: |
@@ -24,14 +23,10 @@ jobs:
 
       - name: Flet Build APK
         run: |
-          # O segredo está no "yes |" que responde "sim" para todas as perguntas do terminal
-          yes | flet build apk
+          yes | flet build apk --include-permissions-android internet
           
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: build/apk/*.apk
-          - name: Flet Build APK
-        run: |
-          yes | flet build apk --include-permissions-android internet
